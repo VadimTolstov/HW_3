@@ -19,5 +19,9 @@ tasks.withType(JavaCompile) {
 }
 
 test {
+
+    //Язык на котором запуститься сайт
+    // systemProperty "chromeoptions.prefs","int.accept_languages=ru"
+
     useJUnitPlatform()
 }
