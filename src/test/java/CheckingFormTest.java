@@ -7,23 +7,25 @@ import java.io.File;
 
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.text;
+
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
 public class CheckingFormTest {
     @BeforeAll
-    static void beforeAll(){
+    static void beforeAll() {
         Configuration.browserSize = "1920x1080";
-     //   Configuration.holdBrowserOpen = true;
+        //   Configuration.holdBrowserOpen = true;
         Configuration.baseUrl = "https://demoqa.com";
     }
 
     @Test
-    void fillFormTest(){
+    void fillFormTest() {
 
         open("/automation-practice-form");
         executeJavaScript("$('#fixedban').remove()");
         executeJavaScript("$('footer').remove()");
+
         $("#firstName").setValue("Алексей Иванович");
         $("[id=lastName]").setValue("Ivanov");
         $("#userEmail").setValue("Ivanov@google.com");
@@ -60,19 +62,23 @@ public class CheckingFormTest {
 //        $("table tbody tr:nth-child(2) td:nth-child(2)").shouldHave(exactText("Ivanov@google.com"));
 //        $("table tbody tr:nth-child(3) td:nth-child(2)").shouldHave(exactText("Female"));
 
-        $(".modal-content").shouldHave(text("Thanks for submitting the form"));
-        $(".modal-content").shouldHave(text("Алексей Иванович Ivanov"));
-        $(".modal-content").shouldHave(text("Ivanov@google.com"));
-        $(".modal-content").shouldHave(text("Female"));
-        $(".modal-content").shouldHave(text("7878787878"));
-        $(".modal-content").shouldHave(text("25 May,1988"));
-        $(".modal-content").shouldHave(text("Music, Reading, Sports"));
-        $(".modal-content").shouldHave(text("JAVA_20.6_10.jpg"));
-        $(".modal-content").shouldHave(text("Hello"));
-        $(".modal-content").shouldHave(text("NCR Delhi"));
+        $(".modal-content").shouldHave(text("Thanks for submitting the form"), text("Алексей Иванович Ivanov"),
+                text("Ivanov@google.com"), text("Female"), text("7878787878"), text("25 May,1988"),
+                text("Music, Reading, Sports"), text("JAVA_20.6_10.jpg"), text("Hello"), text("NCR Delhi")
+        );
+//        $(".modal-content").shouldHave(text("Алексей Иванович Ivanov"));
+//        $(".modal-content").shouldHave(text("Ivanov@google.com"));
+//        $(".modal-content").shouldHave(text("Female"));
+//        $(".modal-content").shouldHave(text("7878787878"));
+//        $(".modal-content").shouldHave(text("25 May,1988"));
+//        $(".modal-content").shouldHave(text("Music, Reading, Sports"));
+//        $(".modal-content").shouldHave(text("JAVA_20.6_10.jpg"));
+//        $(".modal-content").shouldHave(text("Hello"));
+//        $(".modal-content").shouldHave(text("NCR Delhi"));
+
         $("#closeLargeModal").click();
 
-       // sleep(2000);
+        // sleep(2000);
 
 
     }
