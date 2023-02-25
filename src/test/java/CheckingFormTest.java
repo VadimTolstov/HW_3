@@ -62,9 +62,17 @@ public class CheckingFormTest {
 //        $("table tbody tr:nth-child(2) td:nth-child(2)").shouldHave(exactText("Ivanov@google.com"));
 //        $("table tbody tr:nth-child(3) td:nth-child(2)").shouldHave(exactText("Female"));
 
-        $(".modal-content").shouldHave(text("Thanks for submitting the form"), text("Алексей Иванович Ivanov"),
-                text("Ivanov@google.com"), text("Female"), text("7878787878"), text("25 May,1988"),
-                text("Music, Reading, Sports"), text("JAVA_20.6_10.jpg"), text("Hello"), text("NCR Delhi")
+        $(".modal-content").shouldHave(
+                text("Thanks for submitting the form"),
+                text("Алексей Иванович Ivanov"),
+                text("Ivanov@google.com"),
+                text("Female"),
+                text("7878787878"),
+                text("25 May,1988"),
+                text("Music, Reading, Sports"),
+                text("JAVA_20.6_10.jpg"),
+                text("Hello"),
+                text("NCR Delhi")
         );
 //        $(".modal-content").shouldHave(text("Алексей Иванович Ivanov"));
 //        $(".modal-content").shouldHave(text("Ivanov@google.com"));
