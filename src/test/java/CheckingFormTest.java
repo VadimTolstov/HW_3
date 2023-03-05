@@ -5,9 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 
-import static com.codeborne.selenide.Condition.exactText;
-import static com.codeborne.selenide.Condition.text;
-
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
@@ -15,7 +13,7 @@ public class CheckingFormTest {
     @BeforeAll
     static void beforeAll() {
         Configuration.browserSize = "1920x1080";
-        //   Configuration.holdBrowserOpen = true;
+//        Configuration.holdBrowserOpen = true;
         Configuration.baseUrl = "https://demoqa.com";
     }
 
@@ -23,37 +21,41 @@ public class CheckingFormTest {
     void fillFormTest() {
 
         open("/automation-practice-form");
+        $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
         executeJavaScript("$('#fixedban').remove()");
         executeJavaScript("$('footer').remove()");
 
-        $("#firstName").setValue("Алексей Иванович");
+        $("#firstName").setValue("Антон Иванович");
         $("[id=lastName]").setValue("Ivanov");
         $("#userEmail").setValue("Ivanov@google.com");
         $(byText("Female")).click();
         $("#userNumber").setValue("7878787878");
         $("#dateOfBirthInput").click();
-        $(".react-datepicker__month-dropdown-container").$(byText("May")).click();
-        $(".react-datepicker__year-dropdown-container").$(byText("1988")).click();
-        $("[aria-label='Choose Wednesday, May 25th, 1988']").click();
+        $(".react-datepicker__month-dropdown-container").$(byText("April")).click();
+        $(".react-datepicker__year-select").selectOption("1988");
+        $(".react-datepicker__day--030:not(.react-datepicker__day--outside-month)").click();
         $("#subjectsInput").setValue("English").pressEnter();
 
-        $(byText("Music")).click();
-        $(byText("Reading")).click();
-        $(byText("Sports")).click();
+        $("#hobbiesWrapper").$(byText("Music")).click();
+        $("#hobbiesWrapper").$(byText("Reading")).click();
+        $("#hobbiesWrapper").$(byText("Sports")).click();
 
 
 //        $("label[for=hobbies-checkbox-1]").click();
 //        $("label[for=hobbies-checkbox-2]").click();
 //        $("label[for=hobbies-checkbox-3]").click();
 
-        File file = new File("src/test/resources/pictures/JAVA_20.6_10.jpg");
-        $("#uploadPicture").uploadFile(file);
+        $("#uploadPicture").uploadFromClasspath("pictures/JAVA_20.6_10.jpg");
+//      $("#uploadPicture").uploadFile(new File("src/test/resources/pictures/JAVA_20.6_10.jpg"));
+//      File file = new File("src/test/resources/pictures/JAVA_20.6_10.jpg");
+//      $("#uploadPicture").uploadFile(file);
+
 
         $("#currentAddress").setValue("Hello");
         $("#state").click();
-        $(byText("NCR")).click();
+        $("#stateCity-wrapper").$(byText("NCR")).click();
         $("#city").click();
-        $(byText("Delhi")).click();
+        $("#stateCity-wrapper").$(byText("Delhi")).click();
 
         $("#submit").click();
 
@@ -62,13 +64,14 @@ public class CheckingFormTest {
 //        $("table tbody tr:nth-child(2) td:nth-child(2)").shouldHave(exactText("Ivanov@google.com"));
 //        $("table tbody tr:nth-child(3) td:nth-child(2)").shouldHave(exactText("Female"));
 
+        $(".modal-dialog").should(appear);
         $(".modal-content").shouldHave(
                 text("Thanks for submitting the form"),
-                text("Алексей Иванович Ivanov"),
+                text("Антон Иванович Ivanov"),
                 text("Ivanov@google.com"),
                 text("Female"),
                 text("7878787878"),
-                text("25 May,1988"),
+                text("30 April,1988"),
                 text("Music, Reading, Sports"),
                 text("JAVA_20.6_10.jpg"),
                 text("Hello"),
