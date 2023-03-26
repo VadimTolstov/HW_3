@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 public class LabelsTest {
 
     @Test
-    @Feature("Issue в репозитории")
+    @Feature("Issue в репозитории")//проверка
     @Story("Создание Issue")
     @Owner("eroshenkoam")
     @Severity(SeverityLevel.BLOCKER)
