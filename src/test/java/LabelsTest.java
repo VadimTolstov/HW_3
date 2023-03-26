@@ -1,31 +1,35 @@
-import io.qameta.allure.*;
+import io.qameta.allure.Allure;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Link;
+import io.qameta.allure.Owner;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.Story;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
 
 public class LabelsTest {
 
     @Test
-    @Feature("Issue в репозитории")// похоже на название набор тестов
-    @Story("Создание Issue") // списко в нутри наборов тестов
-    @Owner("eroshenkoam") // отображает автора теста
-    @Severity(SeverityLevel.BLOCKER)//отображается в отчете
-    @Link(value = "Testing", url = "https://testing.Github.com") // позволяет прикладывать ссылку к тесту
-    @DisplayName("Создания Issue для авторизованного пользователя") // название теста
+    @Feature("Issue в репозитории")
+    @Story("Создание Issue")
+    @Owner("eroshenkoam")
+    @Severity(SeverityLevel.BLOCKER)
+    @Link(value = "Testing", url = "https://testing.github.com")
+    @DisplayName("Создание Issue для авторизованного пользователя")
     public void testStaticLabels() {
-
     }
 
-    @Test //Подобное что и сверху
+    @Test
     public void testDynamicLabels() {
         Allure.getLifecycle().updateTestCase(
-                t -> t.setName("Создания Issue для авторизованного пользователя")
+                t -> t.setName("Создание Issue для авторизованного пользователя")
         );
         Allure.feature("Issue в репозитории");
         Allure.story("Создание Issue");
         Allure.label("owner", "eroshenkoam");
-        Allure.label("severity",SeverityLevel.CRITICAL.value());
-        Allure.link("Testing", "https://testing.Github.com");
+        Allure.label("severity", SeverityLevel.CRITICAL.value());
+        Allure.link("Testing", "https://testing.github.com");
     }
 
 }
